@@ -1,0 +1,64 @@
+//- comment-view.pug
+//- Author(s): Ruiming Jia
+//- variables:
+//-   <All from navbar.pug>
+//-   message
+//-   feedbacks
+doctype html
+html(lang="en")
+  head
+    include includes/header.html
+  body
+    div(id="wrapper")
+      include includes/navbar.pug
+
+      div(id="page-wrapper")
+        div(class="container-fluid")
+          div(class="row")
+            div(class="col-lg-12")
+              h1(class="page-header")
+                | View Your Previous Feedbacks
+          p(class="text-danger" id="prompt")
+            | #{message}
+          div(class="info-wrapper")
+            if feedbacks.length == 0
+              h2 There is no previous feedbacks
+            else
+              div(class="row")
+                div(class="col-lg-10")
+                  ul(style="list-style-type:none")
+                    each feedback in feedbacks
+                      li(class="feedback-message")
+                        p
+                          |  #{feedback.message}
+                        p(class="text-muted")
+                          span(class="glyphicon glyphicon-time")
+                          |  Sent on: #{feedback.time}
+                        p </br>
+          div(class="row")
+            div(class="col-lg-12")
+              h1(class="page-header")
+                | Messages from Admin
+          p(class="text-danger" id="prompt")
+            | #{message}
+          div(class="info-wrapper")
+            if feedbacks.length == 0
+              h2 There is no messages from Admin
+            else
+              div(class="row")
+                div(class="col-lg-10")
+                  ul(style="list-style-type:none")
+                    each feedbackAdmin in feedbacksAdmin
+                      li(class="feedback-message")
+                        a(href=feedbackAdmin.path)
+                          h4  Reply to Admin
+                        p
+                          | Regarding the massage: #{feedbackAdmin.message} 
+                        p(class="text-muted")
+                          | From your previous message: #{feedbackAdmin.pmessage} 
+                        p(class="text-muted")
+                          span(class="glyphicon glyphicon-time")
+                          |  Sent on: #{feedbackAdmin.time}
+                        p </br>
+
+    include includes/scripts.html

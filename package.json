@@ -1,0 +1,51 @@
+{
+  "name": "sfu-csil-room-management-system",
+  "version": "1.0.0",
+  "description": "In CMPT courses at Simon Fraser University, teaching assistants use the \"CS TA Room Bookings\" system to book rooms for their office hours (http://www.cs.sfu.ca/CourseCentral/tabooking/). This system is obsolete, and we are developing a new system to replace it. This is a course project of CMPT 470 at SFU, instructed by Gregory Baker.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@csil-git1.cs.surrey.sfu.ca:470zls/project.git"
+  },
+  "keywords": [
+    "SFU",
+    "CSIL"
+  ],
+  "author": "John Liu, Chong Zhao, Chen Song, Ruiming Jia",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^2.5.0",
+    "babel-core": "^6.25.0",
+    "babel-loader": "^7.1.1",
+    "babel-preset-es2017": "^6.24.1",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.17.2",
+    "cookie-parser": "^1.4.3",
+    "csurf": "^1.9.0",
+    "express": "^4.15.3",
+    "ical-generator": "^0.2.9",
+    "material-ui": "^1.0.0-alpha.22",
+    "morgan": "^1.8.2",
+    "mysql": "^2.13.0",
+    "node-schedule": "^1.2.3",
+    "nodemailer": "^4.0.1",
+    "nodemon": "^1.11.0",
+    "orm": "^3.2.3",
+    "pug": "^2.0.0-rc.2",
+    "react": "^15.6.1",
+    "slug": "^0.9.1",
+    "socket.io": "^2.0.3",
+    "webpack": "^3.2.0",
+    "webpack-dev-server": "^2.5.1",
+    "webpack-init": "^0.1.2",
+    "xml2js": "^0.4.17"
+  },
+  "devDependencies": {
+    "babel-preset-react": "^6.24.1",
+    "react-dom": "^15.6.1",
+    "webpack-init": "^0.1.2"
+  }
+}

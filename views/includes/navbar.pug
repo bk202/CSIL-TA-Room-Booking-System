@@ -1,0 +1,217 @@
+//- profile.pug
+//- Author(s): Chong, Chen Song
+//- variables:
+//-   username
+//-   source ('CSIL Account' or 'SFU Central Authentication Service')
+//-   allowAdmin (true or false)
+//-   page (see the name attribute of place_holder_list)
+nav(class="navbar navbar-inverse navbar-fixed-top", role="navigation")
+  div(class="navbar-header")
+    button(type="button", class="navbar-toggle", data-toggle="collapse", data-target=".navbar-ex1-collapse")
+      span(class="sr-only") Toggle navigation
+    a(class="navbar-brand",href="/") CS TA Room Booking
+
+  ul(class="nav navbar-right top-nav")
+    li(class="dropdown")
+      a(class="dropdown-toggle", data-toggle="dropdown", href="#")
+        i(class="fa fa-user")
+        |  #{username}
+        b(class="caret")
+      ul(class="dropdown-menu")
+        li
+          a(href="/profile")
+            i(class="fa fa-fw fa-user")
+            |  Profile
+        if source == 'CSIL Account'
+          li
+            a(id="password" href="#")
+              i(class="fa fa-fw fa-key")
+              |  Password
+        li
+          a(href="#")
+            i(class="fa fa-fw fa-gear")
+            |  Settings
+        li(class="divider")
+        if !notloggedIn
+         li
+          a(href="/logout")
+            i(class="fa fa-fw fa-power-off")
+            |  Log Out
+
+  div(class="collapse navbar-collapse navbar-ex1-collapse")
+    ul(class="nav navbar-nav side-nav" id="side-menu")
+      - var place_holder_list = []
+      - if (!allowAdmin)
+        - 
+          place_holder_list = [{ 
+                                  name: "Dashboard", 
+                                  route: "/",
+                                  isMulti: false,
+                                  icon: "fa-dashboard"
+                                }, {
+                                  name: "Bookings",
+                                  isMulti: true,
+                                  icon: "fa-book",
+                                  list: [{
+                                    name: "Book a room",
+                                    route: "/booking"
+                                  }, {
+                                    name: "Manage Bookings",
+                                    route: "/booking/manage"
+                                  }, {
+                                    name: "My Calendar",
+                                    route: "/user/calendar"
+                                  }]
+                                }, {
+                                  name: "Announcements",
+                                  route: "/announcement",
+                                  isMulti: false,
+                                  icon: "fa-info-circle"
+                                }, {
+                                  name: "Report Violations",
+                                  isMulti: true,
+                                  icon: "fa-comments",
+                                  list: [{
+                                    name: "Send Feedback",
+                                    route: "/comment"
+                                  }, {
+                                    name: "View Feedback",
+                                    route: "/comment/view"
+                                  }]
+                                }, {
+                                  name: "Lab Policies",
+                                  route: "/policy",
+                                  isMulti: false,
+                                  icon: "fa-star"
+                                }]
+      - else
+        -
+          place_holder_list = [{ 
+                                  name: "Dashboard", 
+                                  route: "/",
+                                  isMulti: false,
+                                  icon: "fa-dashboard"
+                                }, {
+                                  name: "Bookings",
+                                  isMulti: true,
+                                  icon: "fa-book",
+                                  list: [{
+                                    name: "Book a room",
+                                    route: "/booking"
+                                  }, {
+                                    name: "Manage Bookings",
+                                    route: "/booking/manage"
+                                  }, {
+                                    name: "My Calendar",
+                                    route: "/user/calendar"
+                                  }]
+                                }, {
+                                  name: "Announcements",
+                                  route: "/announcement",
+                                  isMulti: false,
+                                  icon: "fa-info-circle"
+                                }, {
+                                  name: "View Feedback",
+                                  route: "/comment/view",
+                                  isMulti: false,
+                                  icon: "fa-comments",
+                                }, {
+                                  name: "Lab Policies",
+                                  route: "/policy",
+                                  isMulti: false,
+                                  icon: "fa-star"
+                                }, {
+                                  name: "Managements",
+                                  isMulti: true,
+                                  icon: "fa-tags",
+                                  list: [{
+                                    name: "Privileges",
+                                    route: "/admin/privileges"
+                                  }, {
+                                    name: "User Groups",
+                                    route: "/admin/usergroup"
+                                  }, {
+                                    name: "Rooms",
+                                    route: "/admin/rooms"
+                                  }, {
+                                    name: "Bookings",
+                                    route: "/admin/booking"
+                                  }]
+                                }]
+      - var page_name = page
+      - for (var x = 0; x < place_holder_list.length; x++)
+        - if (place_holder_list[x].isMulti)
+          - var isActive = false
+          - for (var i = 0; i < place_holder_list[x].list.length; i++)
+            - if (place_holder_list[x].name + " " + place_holder_list[x].list[i].name == page_name)
+              - isActive = true
+          - if (isActive)
+            li(class="active")
+              a(href="#")
+                i(class="fa fa-fw " + place_holder_list[x].icon)
+                |  #{place_holder_list[x].name}
+                span(class="fa arrow")
+              ul(class="nav nav-second-level collapse in")
+                - for (var i = 0; i < place_holder_list[x].list.length; i++)
+                  - if (place_holder_list[x].name + " " + place_holder_list[x].list[i].name == page_name)
+                    li 
+                      a(class="active" href=place_holder_list[x].list[i].route)
+                        |  #{place_holder_list[x].list[i].name}
+                  - else
+                    li
+                      a(href=place_holder_list[x].list[i].route)
+                        |  #{place_holder_list[x].list[i].name}
+          - else
+            li
+              a(href="#")
+                i(class="fa fa-fw " + place_holder_list[x].icon)
+                |  #{place_holder_list[x].name}
+                span(class="fa arrow")
+              ul(class="nav nav-second-level collapse")
+                - for (var i = 0; i < place_holder_list[x].list.length; i++)
+                  li
+                    a(href=place_holder_list[x].list[i].route)
+                      |  #{place_holder_list[x].list[i].name}
+        - else
+          - if (place_holder_list[x].name == page_name)
+              li(class="active")
+                a(href=place_holder_list[x].route)
+                    i(class="fa fa-fw " + place_holder_list[x].icon)
+                    |  #{place_holder_list[x].name}
+          - else
+              li
+                a(href=place_holder_list[x].route)
+                    i(class="fa fa-fw " + place_holder_list[x].icon)
+                    |  #{place_holder_list[x].name}
+
+//- Please always put the following at the very bottom. -- Chen
+if source == 'CSIL Account'
+  div(class="modal fade" id="passwordModal" tabindex="-1" role="dialog" aria-labelledby="passwordModalLabel")
+    div(class="modal-dialog" role="document")
+      div(class="modal-content")
+        div(class="modal-header")
+          button(type="button" class="close" data-dismiss="modal" aria-label="Close")
+            span(aria-hidden="true") &times;
+          h4(class="modal-title" id="passwordModalLabel") New Password
+        div(class="modal-body")
+          div(class="container-fluid")
+            div(class="row")
+              div(class="col-md-4") Old Password:
+              div(class="col-md-6")
+                div(id="old-password-msg")
+                  input(type="password" class="form-control" placeholder="Old Password" id="old-password")
+            br
+            div(class="row")
+              div(class="col-md-4") New Password:
+              div(class="col-md-6")
+                div(class="new-password-msg")
+                  input(type="password" class="form-control" placeholder="New Password" id="new-password")
+            br
+            div(class="row")
+              div(class="col-md-4") Confirm New Password:
+              div(class="col-md-6")
+                div(class="new-password-msg")
+                  input(type="password" class="form-control" placeholder="Confirm New Password" id="confirm-new-password")
+        div(class="modal-footer")
+          button(type="button" class="btn btn-success" id="change-password-confirm") Change Password
+

@@ -1,0 +1,50 @@
+.divider {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.divider hr {
+    margin-left:auto;
+    margin-right:auto;
+    width: 40%;
+
+}
+
+.left {
+    float:left;
+}
+
+.right {
+    float:right;
+}
+
+.sfu-red {
+    background-color: #A6192E; /*SFU RED, https://www.sfu.ca/clf/colour-palette.html*/
+    border-color: #A6192E;
+}
+
+.sfu-red:hover, .sfu-red:focus, .sfu-red:active, .sfu-red:active:focus, .sfu-red.active, .open>.dropdown-toggle.sfu-red {
+    background-color: #851425; 
+    border-color: #851425;
+}
+
+.info-wrapper {
+    margin-left: 15px;
+    margin-bottom: 15px;
+}
+.announcement-title {
+    list-style-type: none;
+}
+
+.side-nav > li > ul > li > a.active {
+    background-color: #000;
+}
+
+.dataTables_wrapper {
+    overflow-x: scroll;
+}
+
+.calendar_feed {
+    overflow-x: scroll;
+}
